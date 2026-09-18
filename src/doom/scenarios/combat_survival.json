@@ -1,0 +1,37 @@
+{
+  "revision": "combat-survival-v2",
+  "arena_size_units": [
+    768,
+    768
+  ],
+  "initial_enemies": 4,
+  "maximum_alive_enemies": 8,
+  "maximum_alive_per_type": {
+    "DoomFlyImp": 4,
+    "Zombieman": 4
+  },
+  "spawn_interval_game_seconds": 3,
+  "spawn_rule": "One attempt every 105 engine tics; occupied pads are skipped. Alternate types when possible, filling the other type when one reaches its four-enemy cap. At most eight living enemies.",
+  "enemy": "DoomImp (30 health, native projectile/melee AI, Clip drop) and native Zombieman (20 health, hitscan attacks, Clip drop); at most four of each",
+  "ammo": "Four ClipBox pickup pads; each respawns eight game seconds after collection. Enemy kills drop a Clip.",
+  "initial_bullets": 100,
+  "episode_end": "player death only; no time limit or level exit",
+  "neural_state": "preserved across arena resets; baseline synaptic weights are fixed",
+  "observation_boundary": "Enemy counts, item counters and other engine state are spectator telemetry only. Controller input remains RGB pixels.",
+  "comparison": "New environment revision; do not pool with combat-survival-v1, defend_the_center or blue-floor learning experiments. V1 permits eight projectile-only survivors and a circling stalemate.",
+  "sources": [
+    "https://github.com/ZDoom/acc",
+    "https://vizdoom.farama.org/"
+  ],
+  "sha256": {
+    "combat_arena.py": "2be1b8e6f4dccbec3d565672e4f9c3cae954a7b6ca1e777b36f31c6023a63dc3",
+    "combat_survival.acs": "7fbc38bf27fa12999a05a4cb55e09d18a0632fc3b947306b466dadd65764b261",
+    "combat_survival.decorate": "268d72045a392501b1a0647ff5b06e53c890d2b19a34874fa494fb9e37970ff6",
+    "combat_survival.cfg": "bd2160dd42e997db16f8ba0ab38244a672c06416226a21b1ebd198d3a584d943",
+    "combat_survival.wad": "40350fd06042e0d610c258345b90e0db69037562d1f2302d850d8cd6ee9d184b"
+  },
+  "compiler": {
+    "source": "https://github.com/ZDoom/acc",
+    "commit": "bdb9bc4d2c5aee7ca3ff8da985d73aaf83af0557"
+  }
+}

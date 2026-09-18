@@ -1,0 +1,11 @@
+# Isolated Python 3.11 environment for the Shiu et al. published model.
+# Brian2 matches upstream; numpy patch/pandas/runtime versions recorded separately.
+brian2==2.5.1
+setuptools==80.9.0
+numpy==1.24.4
+pandas==2.0.3
+scipy==1.10.1
+Cython==0.29.37
+sympy==1.12.1
+pyarrow==20.0.0
+joblib==1.5.2

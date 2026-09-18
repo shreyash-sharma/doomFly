@@ -1,0 +1,7 @@
+// Original arena tuning: normal DoomImp AI/projectile, reduced hit points.
+// The engine controls enemies. The fly controller is unchanged.
+ACTOR DoomFlyImp : DoomImp
+{
+    Health 30
+    DropItem "Clip", 256
+}

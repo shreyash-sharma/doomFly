@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv*/
+connectome_data/
+outputs/
+*.npz
+.DS_Store

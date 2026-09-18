@@ -1,0 +1,9 @@
+# Additional dependencies alongside the existing neural environment.
+# Runtime tested with Python 3.11 and numpy 1.24.4.
+numpy==1.24.4
+brian2==2.5.1
+vizdoom==1.3.0
+numba==0.61.2
+pillow==11.3.0
+pytest==8.4.2
+pyarrow==20.0.0

@@ -1,0 +1,112 @@
+{
+  "checkpoint_sha256": "5e02c81cfb9da9fbe703519f33bccd832003206c9a266b25777079bb88532dc7",
+  "claim_boundary": "No PPO weights changed; this is evaluation only.",
+  "condition": "doom_guy",
+  "episode_seconds": 30,
+  "purpose": "long frozen-v5 gameplay evaluation",
+  "rows": [
+    {
+      "metrics": {
+        "advance_ticks": 126,
+        "ammo_spent": 21,
+        "attacks": 194,
+        "damage_inflicted": 50,
+        "damage_received": 114,
+        "hits": 4,
+        "kills": 2,
+        "macro_counts": {
+          "advance": 28,
+          "advance_attack": 28,
+          "attack": 28,
+          "left": 52,
+          "noop": 24,
+          "orbit_left_attack": 28,
+          "orbit_right_attack": 42,
+          "retreat": 28,
+          "right": 36,
+          "strafe_left_attack": 28,
+          "strafe_right_attack": 40
+        },
+        "score": 7.7800000000000455,
+        "strafe_ticks": 138,
+        "survival_seconds": 10.342857142857143,
+        "survived": false,
+        "ticks": 362,
+        "tk_spikes": 904,
+        "turn_ticks": 158
+      },
+      "seed": 788001
+    },
+    {
+      "metrics": {
+        "advance_ticks": 72,
+        "ammo_spent": 12,
+        "attacks": 116,
+        "damage_inflicted": 0,
+        "damage_received": 102,
+        "hits": 0,
+        "kills": 1,
+        "macro_counts": {
+          "advance": 16,
+          "advance_attack": 28,
+          "attack": 24,
+          "left": 39,
+          "noop": 28,
+          "orbit_left_attack": 16,
+          "orbit_right_attack": 12,
+          "retreat": 12,
+          "right": 12,
+          "strafe_left_attack": 16,
+          "strafe_right_attack": 20
+        },
+        "score": -3.2899999999999814,
+        "strafe_ticks": 64,
+        "survival_seconds": 6.371428571428571,
+        "survived": false,
+        "ticks": 223,
+        "tk_spikes": 592,
+        "turn_ticks": 79
+      },
+      "seed": 788002
+    },
+    {
+      "metrics": {
+        "advance_ticks": 104,
+        "ammo_spent": 15,
+        "attacks": 128,
+        "damage_inflicted": 0,
+        "damage_received": 102,
+        "hits": 0,
+        "kills": 2,
+        "macro_counts": {
+          "advance": 32,
+          "advance_attack": 20,
+          "attack": 20,
+          "left": 24,
+          "noop": 20,
+          "orbit_left_attack": 20,
+          "orbit_right_attack": 32,
+          "retreat": 24,
+          "right": 32,
+          "strafe_left_attack": 28,
+          "strafe_right_attack": 8
+        },
+        "score": 6.100000000000037,
+        "strafe_ticks": 88,
+        "survival_seconds": 7.428571428571429,
+        "survived": false,
+        "ticks": 260,
+        "tk_spikes": 491,
+        "turn_ticks": 108
+      },
+      "seed": 788003
+    }
+  ],
+  "schema": 1,
+  "seeds": [
+    788001,
+    788002,
+    788003
+  ],
+  "status": "complete"
+}

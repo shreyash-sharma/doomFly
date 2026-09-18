@@ -1,0 +1,4 @@
+# Upstream Brian2 2.5.1 setup imports pkg_resources, removed from newer setuptools.
+setuptools==68.2.2
+numpy==1.24.4
+Cython==0.29.37

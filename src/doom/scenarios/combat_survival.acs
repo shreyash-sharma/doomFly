@@ -1,0 +1,102 @@
+#include "zcommon.acs"
+
+// Environment rules only. No script selects or changes player controls.
+// USER1..6 are observer counters, not neural inputs.
+global int 1: enemiesAlive;
+global int 2: enemiesSpawned;
+global int 3: ammoPickups;
+global int 4: ammoSpawned;
+global int 5: impsAlive;
+global int 6: zombiesAlive;
+int nextEnemyId = 1000;
+int nextEnemyType = 0;
+int spawnPad = 0;
+int enemyX[8] = {280, 280, 0, -280, -280, -280, 0, 280};
+int enemyY[8] = {0, 280, 280, 280, 0, -280, -280, -280};
+int ammoX[4] = {160, -160, -160, 160};
+int ammoY[4] = {160, 160, -160, -160};
+int ammoCooldown[4];
+str enemyTypes[2] = {"DoomFlyImp", "Zombieman"};
+
+function void AddEnemy(void) {
+    int attempt;
+    int id;
+    int kind;
+    if (enemiesAlive >= 8) return;
+    // Independent four-enemy caps prevent projectile-only survivors from
+    // occupying every slot and permanently suppressing hitscan replacements.
+    kind = nextEnemyType;
+    if (kind == 0 && impsAlive >= 4) kind = 1;
+    if (kind == 1 && zombiesAlive >= 4) kind = 0;
+    // Fixed pads; an occupied pad is skipped using normal engine collision.
+    for (attempt = 0; attempt < 8; attempt++) {
+        id = nextEnemyId;
+        if (Spawn(enemyTypes[kind], enemyX[spawnPad] * 1.0,
+                  enemyY[spawnPad] * 1.0, 0.0, id, 128)) {
+            nextEnemyId++;
+            enemiesAlive++;
+            enemiesSpawned++;
+            if (kind == 0) impsAlive++; else zombiesAlive++;
+            nextEnemyType = 1 - kind;
+            SetThingSpecial(id, ACS_ExecuteAlways, 3, 0, id, kind);
+            // Native monster AI pursues the player. Never a player policy.
+            Thing_Hate(id, 1, 0);
+            spawnPad = (spawnPad + 2) % 8;
+            return;
+        }
+        spawnPad = (spawnPad + 1) % 8;
+    }
+}
+
+script 1 OPEN {
+    int elapsed = 0;
+    int i;
+    enemiesAlive = 0;
+    enemiesSpawned = 0;
+    impsAlive = 0;
+    zombiesAlive = 0;
+    nextEnemyType = 0;
+    ammoPickups = 0;
+    ammoSpawned = 0;
+    // Player ENTER script must establish its target ID first.
+    Delay(1);
+    for (i = 0; i < 4; i++) AddEnemy();
+    while (TRUE) {
+        if (elapsed > 0 && elapsed % 105 == 0) AddEnemy();
+        for (i = 0; i < 4; i++) {
+            if (ThingCount(T_NONE, 200 + i) == 0) {
+                if (ammoCooldown[i] == 0) {
+                    if (Spawn("ClipBox", ammoX[i] * 1.0,
+                              ammoY[i] * 1.0, 0.0, 200 + i)) {
+                        ammoSpawned++;
+                        ammoCooldown[i] = -1;
+                    }
+                } else if (ammoCooldown[i] == -1) {
+                    ammoPickups++;
+                    ammoCooldown[i] = 280;
+                } else {
+                    ammoCooldown[i]--;
+                }
+            }
+        }
+        elapsed++;
+        Delay(1);
+    }
+}
+
+script 2 ENTER {
+    Thing_ChangeTID(0, 1);
+    ClearInventory();
+    GiveInventory("Pistol", 1);
+    TakeInventory("Clip", 999);
+    GiveInventory("Clip", 100);
+    SetWeapon("Pistol");
+}
+
+script 3 (int id, int kind) {
+    enemiesAlive--;
+    if (kind == 0) impsAlive--; else zombiesAlive--;
+    // Keep corpses briefly, then bound actor accumulation in long rounds.
+    Delay(700);
+    Thing_Remove(id);
+}
